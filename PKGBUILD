@@ -22,7 +22,7 @@ source=("https://xff.cz/kernels/${pkgver}/ppp.tar.gz"
         "12-p-boot-update.hook"
         "13-p-boot-binary-update.hook")
 
-sha256sums=('2d7fc026ae9b6816bbbce6dc3a2c606b023009649b0cf30937fd249fd9cbe68b'
+sha256sums=('939eaea79fd0418c20da497cc505500eb9d895e8f2e9674d82c172a0ac5ec677'
             'SKIP'
             'SKIP'
             'SKIP'
