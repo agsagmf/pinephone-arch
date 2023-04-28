@@ -55,7 +55,7 @@ package() {
     sed -i "s/FSTYPE/${_fstype}/" boot.conf
     install -Dm644 boot.conf "${pkgdir}/p-boot/boot.conf"
 
-    cd "${srcdir}/pp-${pkgver}"
+    cd "${srcdir}/ppp-${pkgver}"
     install -Dm644 Image "${pkgdir}/p-boot/Image"
     install -Dm644 board.dtb "${pkgdir}/p-boot/board.dtb"
     
@@ -69,8 +69,8 @@ package() {
     install -Dm644 pboot2.argb "${pkgdir}/p-boot/files/pboot2.argb"
 
     # Install modules without symlinks
-    _kernver=$(ls ${srcdir}/pp-${pkgver}/modules/lib/modules)
-    cd "${srcdir}/pp-${pkgver}/modules/lib/modules/${_kernver}"
+    _kernver=$(ls ${srcdir}/ppp-${pkgver}/modules/lib/modules)
+    cd "${srcdir}/ppp-${pkgver}/modules/lib/modules/${_kernver}"
     for file in *; do
         if [[ -L $file ]]; then rm $file; fi
     done
