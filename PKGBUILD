@@ -57,7 +57,7 @@ package() {
 
     cd "${srcdir}/pp-${pkgver}"
     install -Dm644 Image "${pkgdir}/p-boot/Image"
-    install -Dm644 board-1.2.dtb "${pkgdir}/p-boot/board-1.2.dtb"
+    install -Dm644 board.dtb "${pkgdir}/p-boot/board.dtb"
     
     cd "${srcdir}/p-boot/dist"
     install -Dm644 fw.bin "${pkgdir}/p-boot/fw.bin"
