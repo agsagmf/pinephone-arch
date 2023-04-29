@@ -18,9 +18,11 @@ source=("https://xff.cz/kernels/${pkgver}/ppp.tar.gz"
         "boot.conf"
         "fstab"
         "10-pp-initramfs.hook"
-        "11-setup-boot-partition.hook"
         "12-p-boot-update.hook"
         "13-p-boot-binary-update.hook")
+
+# Excluded for now
+# "11-setup-boot-partition.hook"
 
 sha256sums=('939eaea79fd0418c20da497cc505500eb9d895e8f2e9674d82c172a0ac5ec677'
             'SKIP'
@@ -33,10 +35,11 @@ sha256sums=('939eaea79fd0418c20da497cc505500eb9d895e8f2e9674d82c172a0ac5ec677'
 
 # Assuming boot partition is on the root device as partition 1, if there is an existing
 # p-boot installation, the boot partition is not mounted.
-_bootdev=$(mount | grep 'on / ' | awk '{ print $1 }' | sed 's/..$//')
-_rootpart=$(mount | grep 'on / ' | awk '{ print $1 }')
-_bootpart=$(mount | grep 'on / ' | awk '{ print $1 }' | sed 's/.$/1/')
-_fstype=$(mount | grep 'on / ' | awk '{ print $5 }')
+# HARDCODED FOR TESTING
+_bootdev=/dev/mmcblk2 #_bootdev=$(mount | grep 'on / ' | awk '{ print $1 }' | sed 's/..$//')
+_rootpart=/dev/mmcblk2p2 #_rootpart=$(mount | grep 'on / ' | awk '{ print $1 }')
+_bootpart=/dev/mmcblk2p1 #_bootpart=$(mount | grep 'on / ' | awk '{ print $1 }' | sed 's/.$/1/')
+_fstype=f2fs #_fstype=$(mount | grep 'on / ' | awk '{ print $5 }')
 
 check() {
     echo "  -> Detected block device path as ${_bootdev}"
@@ -82,9 +85,10 @@ package() {
     sed -i "s/KERNELVERSION/${_kernver}/" 10-pp-initramfs.hook
     install -Dm644 10-pp-initramfs.hook "${pkgdir}/etc/pacman.d/hooks/10-pp-initramfs.hook"
 
+    # SKIP FOR NOW. DONE MANUALLY
     # Install script and pacman hook for script to reformat boot partition - make room for p-boot.bin
-    sed -i "s#BOOTDEV#${_bootdev}#" 11-setup-boot-partition.hook
-    install -Dm644 11-setup-boot-partition.hook "${pkgdir}/etc/pacman.d/hooks/11-setup-boot-partition.hook"
+    # sed -i "s#BOOTDEV#${_bootdev}#" 11-setup-boot-partition.hook
+    # install -Dm644 11-setup-boot-partition.hook "${pkgdir}/etc/pacman.d/hooks/11-setup-boot-partition.hook"
 
     # Install pacman hook which runs p-boot-conf for boot partition
     sed -i "s#BOOTPART#${_bootpart}#" 12-p-boot-update.hook
