@@ -1,1 +1,2 @@
+BOOTPART /boot vfat rw 0 1
 ROOTPART / FSTYPE rw,relatime 0 0
