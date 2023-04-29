@@ -30,7 +30,6 @@ sha256sums=('939eaea79fd0418c20da497cc505500eb9d895e8f2e9674d82c172a0ac5ec677'
             'SKIP'
             'SKIP'
             'SKIP'
-            'SKIP'
             'SKIP')
 
 # Assuming boot partition is on the root device as partition 1, if there is an existing
